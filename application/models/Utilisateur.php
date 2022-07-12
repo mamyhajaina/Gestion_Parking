@@ -59,4 +59,11 @@ class Utilisateur extends CI_Model
         return $query;
     }
 
+    public function create_voiture($matriculation, $marque, $idutilisateur)
+    {
+        $sql = "insert into voiture(matriculation,marque,idutilisateur) values(%s,%s,%s)";
+        $sql = sprintf($sql, $this->db->escape($matriculation), $this->db->escape($marque), $this->db->escape($idutilisateur));
+        $query = $this->db->query($sql);
+        return $query;
+    }
 }

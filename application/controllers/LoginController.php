@@ -24,7 +24,7 @@ class LoginController extends CI_Controller
 
 	public function index()
 	{
-		$this->load->view('Back/index');
+		$this->load->view('index');
 	}
 	public function login()
 	{
@@ -47,9 +47,7 @@ class LoginController extends CI_Controller
 			if ($Utilisateur->email != null) {
 				$this->session->set_userdata("Utilisateur", $Utilisateur->email);
 				$this->session->set_userdata("Utilisateurid", $Utilisateur->idutilisateur);
-				$util = $this->Utilisateur->get_somme($Utilisateur->idutilisateur);
-				$this->session->set_userdata("Utilisateursomme", $util->somme);
-				redirect('LoginController/index');
+				redirect('Front/ParkingController/liste_Parking');
 			} else {
 				redirect('LoginController/index');
 			}
@@ -62,6 +60,22 @@ class LoginController extends CI_Controller
 		unset($_SESSION['adminemail']);
 		unset($_SESSION['adminenom']);
 		$this->session->sess_destroy();
+		redirect('LoginController/index');
+	}
+
+	public function page_inscription()
+	{
+		$this->load->view('inscription');
+	}
+
+	public function inserte()
+	{
+		$this->loadmodel();
+		$nom = $this->input->post('nom');
+		$prenom = $this->input->post('prenom');
+		$email = $this->input->post('email');
+		$mtps = $this->input->post('mtps');
+		$this->Utilisateur->create($nom, $prenom, $email, $mtps);
 		redirect('LoginController/index');
 	}
 }

@@ -12,7 +12,7 @@ class ParkingController extends CI_Controller
 
 	public function statistique()
 	{
-		$this->load->view('Back/Statistique');
+		$this->load->view('Front/Statistique');
 	}
 	public function liste_Parking()
 	{
@@ -20,7 +20,7 @@ class ParkingController extends CI_Controller
 		$parking = $this->Parking->get_Parking();
 		$data = array();
 		$data['parking'] = $parking;
-		$this->load->view('Back/Liste_Parking', $data);
+		$this->load->view('Front/Liste_Parking', $data);
 	}
 
 	public function todispo()
@@ -33,7 +33,7 @@ class ParkingController extends CI_Controller
 
 	public function inserte_park()
 	{
-		$this->load->view('Back/Inserte_Parking');
+		$this->load->view('Front/Inserte_Parking');
 	}
 
 	public function ajout_parking()
@@ -44,5 +44,10 @@ class ParkingController extends CI_Controller
 			$this->Parking->inserte();
 		}
 		redirect('ParkingController/liste_Parking');
+	}
+
+	public function page_ajout_voiture()
+	{
+		$this->load->view('Front/Inserte_Parking');
 	}
 }
